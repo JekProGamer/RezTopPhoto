@@ -32,14 +32,14 @@ Counter-Strike Global Offensive/
 materials/reztopphoto/reztop_billboard_texture.png
 ```
 
-## Этап 2. Модель
+## Этап 2. Подготовка FBX через Blender
 
-OBJ — это промежуточный формат, а не готовая игровая модель Source 2.
+OBJ — промежуточный формат, а не готовая игровая модель Source 2. Для автоматической подготовки FBX рядом добавлен `export_billboard_fbx.py`.
 
-1. Импортируй `reztop_billboard.obj` в Blender.
-2. Проверь UV-развёртку и слоты материалов `Photo_Surface` и `Frame_Black`.
-3. Назначь материал баннера лицевой поверхности, а рамке — тёмный материал.
-4. Экспортируй геометрию в FBX.
+1. Установи Blender.
+2. Скачай всю папку `RezTopBillboard`, чтобы рядом лежали `reztop_billboard.obj`, `reztop_billboard.mtl`, `reztop_billboard_texture.png` и `export_billboard_fbx.py`.
+3. Открой Blender, выбери вкладку Scripting, нажми Open и открой `export_billboard_fbx.py`.
+4. Нажми Run Script. В папке появится `reztop_billboard.fbx`.
 5. Открой CS2 Workshop Tools → ModelDoc, создай модель, импортируй FBX и назначь скомпилированный материал борда.
 6. Настрой коллизию/флаги модели по необходимости и скомпилируй `.vmdl`.
 
