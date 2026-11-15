@@ -1,0 +1,14 @@
+# RezTop PhotoPanel — flat 16:9 panel, 1.6 x 0.9 units
+mtllib photo_panel.mtl
+o RezTopPhotoPanel
+v -0.8 -0.45 0.0
+v  0.8 -0.45 0.0
+v  0.8  0.45 0.0
+v -0.8  0.45 0.0
+vt 0.0 0.0
+vt 1.0 0.0
+vt 1.0 1.0
+vt 0.0 1.0
+vn 0.0 0.0 1.0
+usemtl PhotoSurface
+f 1/1/1 2/2/1 3/3/1 4/4/1
