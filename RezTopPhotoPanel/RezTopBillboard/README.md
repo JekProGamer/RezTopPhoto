@@ -1,52 +1,55 @@
 # RezTopPhoto Billboard — CS2 asset preparation
 
-This folder contains the source artwork and the first Source 2 material setup for the RezTop.cc billboard.
+Исходники широкого рекламного борда RezTop.cc и первый материал Source 2.
 
-## Files
-- `reztop_billboard.obj` — editable billboard mesh source (OBJ).
-- `reztop_billboard.mtl` — OBJ preview material definitions.
-- `reztop_billboard_texture.png` — supplied RezTop.cc banner artwork.
-- `reztop_billboard.vmat` — CS2 material source using the `csgo_complex.vfx` shader.
-- `compile_material.bat` — starter script for the CS2 Resource Compiler.
+## Файлы
+- `reztop_billboard.obj` — геометрия борда в формате OBJ.
+- `reztop_billboard.mtl` — материалы для предпросмотра OBJ.
+- `reztop_billboard_texture.png` — оригинальный баннер.
+- `reztop_billboard.vmat` — исходник материала CS2 на шейдере `csgo_complex.vfx`.
+- `compile_material.bat` — помощник для копирования исходников в addon и запуска Resource Compiler.
 
-## Important: material and texture path
+## Этап 1. Подготовка материала и текстуры
 
-In your CS2 addon content folder, create:
+1. Скачай всю папку `RezTopBillboard` из репозитория.
+2. Проверь путь установки CS2 в файле `compile_material.bat`. По умолчанию указан стандартный путь Steam.
+3. Запусти `compile_material.bat`.
+4. Скрипт скопирует VMAT и PNG в:
 
 ```
-content/csgo_addons/reztopphoto/
-└── materials/
-    └── reztopphoto/
+Counter-Strike Global Offensive/
+└── content/csgo_addons/reztopphoto/
+    └── materials/reztopphoto/
         ├── reztop_billboard.vmat
         └── reztop_billboard_texture.png
 ```
 
-Copy `reztop_billboard.vmat` and `reztop_billboard_texture.png` into that folder. The VMAT references the texture as:
+Затем скрипт запустит `game/bin/win64/resourcecompiler.exe` для VMAT. Проверь вывод компилятора и наличие скомпилированных ресурсов в папке addon. Если CS2 установлен не в стандартную папку, исправь `CS2_ROOT` в BAT-файле.
+
+В VMAT указан путь к текстуре:
 
 ```
 materials/reztopphoto/reztop_billboard_texture.png
 ```
 
-The game uses compiled Source 2 resources. The source `.vmat` and PNG are not themselves the final runtime assets. Compile the material with the CS2 Workshop Tools Resource Compiler. The compiler should produce compiled material/texture resources (for example `.vmat_c` and `.vtex_c`). Verify the output in the addon's game directory and preview it in the Material Editor.
+## Этап 2. Модель
 
-## Model stage
+OBJ — это промежуточный формат, а не готовая игровая модель Source 2.
 
-The OBJ is an interchange mesh, not a compiled CS2 model. To finish the model:
-1. Import `reztop_billboard.obj` into Blender.
-2. Check the face orientation, UVs, and the two material slots (`Photo_Surface`, `Frame_Black`).
-3. Assign the compiled/created billboard material to the photo surface and a dark material to the frame.
-4. Export the mesh as FBX.
-5. In CS2 Workshop Tools, create a model in ModelDoc, import the FBX, assign the billboard material, configure collision as appropriate, and compile the `.vmdl` to `.vmdl_c`.
+1. Импортируй `reztop_billboard.obj` в Blender.
+2. Проверь UV-развёртку и слоты материалов `Photo_Surface` и `Frame_Black`.
+3. Назначь материал баннера лицевой поверхности, а рамке — тёмный материал.
+4. Экспортируй геометрию в FBX.
+5. Открой CS2 Workshop Tools → ModelDoc, создай модель, импортируй FBX и назначь скомпилированный материал борда.
+6. Настрой коллизию/флаги модели по необходимости и скомпилируй `.vmdl`.
 
-## Current status
+## Статус
+- [x] PNG баннера добавлен в репозиторий.
+- [x] OBJ/MTL исходники добавлены.
+- [x] VMAT для CS2 добавлен.
+- [x] BAT-помощник для копирования исходников и запуска компилятора добавлен.
+- [ ] Материал и текстура успешно скомпилированы и проверены в CS2 Workshop Tools.
+- [ ] Геометрия импортирована в ModelDoc и скомпилирована в `.vmdl_c`.
+- [ ] Борд проверен на игровой карте.
 
-- [x] Original banner PNG is present in this repository folder.
-- [x] OBJ/MTL source is present.
-- [x] CS2 VMAT source has been added.
-- [ ] Material and texture compiled and tested in CS2 Workshop Tools.
-- [ ] OBJ imported/exported and model compiled in ModelDoc.
-- [ ] In-game placement and visibility tested on a workshop map.
-
-## Notes
-
-CounterStrikeSharp cannot turn an arbitrary PNG into a world-space model texture by assigning a file path. The model and its Source 2 material/texture assets must be compiled and available to clients through a supported addon/workshop distribution path.
+Важно: CounterStrikeSharp не превращает произвольный PNG в игровую 3D-текстуру только по пути к файлу. Модель, материал и текстура должны быть подготовлены и доступны клиентам через поддерживаемый механизм распространения ресурсов.
