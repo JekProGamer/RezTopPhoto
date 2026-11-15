@@ -1,0 +1,5 @@
+Layer0
+{
+    shader "csgo_complex.vfx"
+    TextureColor "materials/reztopphoto/reztop_billboard_texture.png"
+}
