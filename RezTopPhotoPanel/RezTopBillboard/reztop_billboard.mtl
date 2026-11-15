@@ -1,0 +1,11 @@
+newmtl Photo_Surface
+Ka 1.0 1.0 1.0
+Kd 1.0 1.0 1.0
+Ks 0.0 0.0 0.0
+map_Kd reztop_billboard_texture.png
+
+newmtl Frame_Black
+Ka 0.015 0.015 0.02
+Kd 0.025 0.025 0.035
+Ks 0.18 0.18 0.22
+Ns 50
